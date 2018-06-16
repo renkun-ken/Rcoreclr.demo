@@ -1,0 +1,15 @@
+PKG_CXXFLAGS=-fPIE
+PKG_LIBS=-ldl -lpthread
+
+LIBDIR = manlib/bin/Release/netstandard2.0/publish
+MANLIB = $(LIBDIR)/manlib.dll
+
+all: clean
+
+$(SHLIB): $(MANLIB)
+
+$(MANLIB):
+				dotnet publish manlib/manlib.csproj -c Release
+
+clean:
+				rm -rf $(SHLIB) $(MANLIB) $(OBJECTS) manlib/bin manlib/obj
